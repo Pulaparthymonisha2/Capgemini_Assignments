@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+ str-style,
+section#one .title text,
+section#one .title path {
+  stroke-dasharray: 700;
+  stroke-dashoffset: 1000;
+  animation: dash 4s linear forwards;
+}
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0 4px;
+  height: 100vh;
+  overflow: hidden;
+  line-height: 1.5;
+  font-family: 'Inconsolata', sans-serif;
+  font-size: 62.5%;
+  color: #fff;
+  background-color: #391f61;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background-color: #391f61;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 1em;
+  background-color: #d4d1de;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #d4d1de;
+}
+a {
+  text-decoration: none;
+  color: #fff;
+}
+a:hover,
+a.leadlink {
+  color: #df2359;
+}
+h1,
+h2,
+header a {
+  text-transform: uppercase;
+}
+.smooth {
+  margin: 0 auto;
+  padding: 0 4px;
+  padding-left: 8px;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+header,
+footer {
+  position: relative;
+  padding: 2em 3em;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  height: 10vh;
+  background-color: #1d1e22;
+}
+header h3 {
+  position: relative;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  color: #10abe8;
+}
+header ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 1em 0;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+}
+header ul li {
+  position: relative;
+  margin: 0 1em;
+  transition: all 0.2s linear;
+}
+header ul li a {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  color: #fff;
+}
+header ul li::before {
+  position: absolute;
+  content: '';
+  top: calc(100% + 4px);
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background-color: #fff;
+  transform-origin: 0 100%;
+  transform: rotate(-5deg);
+  transition: all 0.2s ease-out;
+}
+header ul li:hover::before {
+  width: 100%;
+  background-color: #10abe8;
+}
+.grid {
+  display: grid;
+  grid-gap: 2em;
+}
+.grid.g_two {
+  grid-template-columns: 1fr minmax(300px, auto);
+}
+.flex {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.flex.column {
+  flex-flow: column wrap;
+  justify-content: space-between;
+}
+.jcsb {
+  justify-content: space-between;
+}
+progress {
+  position: relative;
+  margin: 1em 0;
+}
+progress[value] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  max-width: 360px;
+  height: 1px;
+}
+progress::-webkit-progress-bar {
+  background-color: #666;
+  border-radius: 1em;
+}
+progress::-webkit-progress-value {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  background-color: #10abe8;
+  border-radius: 1em;
+  height: 5px;
+}
+section {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  padding: 2em 3em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  border-radius: 1em;
+  background-color: #1c1b1b;
+}
+section:nth-child(odd) {
+  background-color: #1d1e22;
+}
+section#one {
+  background-image: url("https://i.pinimg.com/originals/ed/a5/54/eda554b85f140088007783a7c1d280d7.png");
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+}
+section#one h1 {
+  visibility: hidden;
+  opacity: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0;
+}
+section#one .title {
+  min-width: 1000px;
+  max-height: 80px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
+}
+section#one .title text {
+  letter-spacing: 2px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+section#one .title path {
+  stroke: #fff;
+  stroke-width: 4;
+  animation-delay: 1s;
+}
+section#one::after {
+  position: absolute;
+  content: '';
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(0deg, rgba(29,30,34,0.3), #1d1e22);
+}
+section#two .blocks,
+section#four .blocks {
+  padding: 2em 0;
+  display: flex;
+  width: 100%;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+section#two .blocks .block,
+section#four .blocks .block {
+  margin: 0 auto;
+  display: flex;
+  width: 23%;
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #0af5e5;
+  border-radius: 1em;
+  background-color: #191a1d;
+  transition: all 0.2s linear;
+}
+section#two .blocks .block:hover,
+section#four .blocks .block:hover {
+  transform: translateY(-10px);
+  background-color: #1e2121;
+}
+section#four .blocks .block {
+  padding: 0.25em 1em;
+  width: 49%;
+  height: auto;
+  flex-flow: column wrap;
+  background-color: #191a1d;
+}
+
+
+section h2 {
+  font-family: 'Montserrat', sans-serif;
+}
+section h2 span {
+  color: #05faf2;
+}
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+}
+.content p.lead {
+  font-size: 1.25rem;
+}
+.content .blur {
+  position: relative;
+  overflow: hidden;
+  margin: auto;
+  margin-left: 2em;
+  padding: 1em;
+  width: 100%;
+  height: 350px;
+  border-radius: 0.35em;
+}
+.content .blur::before {
+  position: absolute;
+  content: '';
+  top: -25%;
+  left: -25%;
+  width: 150%;
+  height: 150%;
+  box-shadow: inset 0 0 0 600px rgba(255,255,255,0.3);
+  filter: blur(10px);
+}
+
+footer {
+  padding-bottom: 1em;
+  width: 100%;
+  min-height: 35vh;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #191a1d;
+}
+footer h3 {
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+}
+footer h3::before {
+  position: absolute;
+  content: '';
+  top: calc(100% + 4px);
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background-color: #f0e6e9;
+  transform-origin: 0 100%;
+  transform: rotate(-5deg);
+  transition: all 0.2s ease-out;
+}
+footer h5 {
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+}
+footer h5.follow {
+  color: #f0e6e9;
+}
+footer ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+footer ul li {
+  line-height: 1.5;
+  transition: transform 200ms ease-in;
+  will-change: transform;
+}
+footer ul li:hover {
+  transform: translateX(5px);
+}
+footer .widgets,
+footer .copy {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+footer .widgets .widget,
+footer .copy .widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+footer .copy {
+  margin-top: 1em;
+  border-top: 2px solid #312d3c;
+}
+footer .copy p {
+  margin: 0.75em 0 0;
+}
+footer .copy span {
+  position: relative;
+  display: inline-block;
+  color: #f0e6e9;
+  
+}
+@media (max-width: 991px) {
+  .blur {
+    display: none;
+  }
+  .content {
+    text-align: center;
+  }
+  .content h1::before {
+    display: none;
+  }
+}
+@-moz-keyframes hearts {
+  50% {
+    transform: scale(1.4);
+  }
+}
+@-webkit-keyframes hearts {
+  50% {
+    transform: scale(1.4);
+  }
+}
+@-o-keyframes hearts {
+  50% {
+    transform: scale(1.4);
+  }
+}
+@keyframes hearts {
+  50% {
+    transform: scale(1.4);
+  }
+}
+@-moz-keyframes dash {
+  90% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill: #fff;
+  }
+}
+@-webkit-keyframes dash {
+  90% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill: #fff;
+  }
+}
+@-o-keyframes dash {
+  90% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill: #fff;
+  }
+}
+@keyframes dash {
+  90% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill: #fff;
+  }
+}
+
+</style>
+</head>
+<body>
+ 
+<div class="smooth">
+  <header>
+    <h3>K.K.K</h3>
+    <ul>
+      <li><a href="#one">About Me</a></li>
+      <li><a href="#two">Education</a></li>
+      <li><a href="#three">Technical Knowledge</a></li>
+      <li><a href="#four">Projects</a></li>
+      <li><a href="#bottom">Contact</a></li>
+    </ul>
+  </header>
+  <section id="one">
+    <div class="content parallax">
+      <div>
+        <h1>Welcome to K V S Kalyan Kumar profile</h1>
+        <svg class="title">
+          <text x="0" y="40" z="2">Welcome to K V S Kalyan Kumar profile</text>
+          <path d="M 0 66 50 61"></path>
+        </svg>
+        <p class="lead">
+          Love to learn not to study is my moto, creative thoughts are my strengths and implementation through smart work and team spirit is my talent. I always wanted to win over all my words. Worthy words from my heart make me a good public speaker. Loves to perform leadership skills whenever needed. 
+           
+        </p>
+        
+      </div>
+      
+  </section>
+  <section id="two">
+    <h2>Educational<span> Background</span></h2>
+    
+    <div class="blocks">
+      <div class="block">
+        
+        <p>10th grade with 9.5gpa from Bhashyam High School</p>
+      
+      </div>
+      <div class="block">
+        <p>Intermediate with 96% from BIIT Jr college</p>
+      </div>
+      <div class="block">
+        <p>Engineering with 7.33gpa from LPU</p>
+      </div>
+  
+  </section>
+  <section id="three">
+    <div class="grid g_two">
+      <div>
+        <h2>Technical<span> Background</span></h2>
+        <p>Understanding concept and innovative application is my habit in the due course of engineering I learned so many languages and different SAAS technologies why make my technical background stronger and can help in your organisation</p>
+        
+      </div>
+      <div class="flex column">
+        <div class="flex column">
+          <div class="flex jcsb">
+            <h4>C++</h4><span>85%</span>
+          </div>
+          <progress value="85" max="100"></progress>
+        </div>
+        <div class="flex column">
+          <div class="flex jcsb">
+            <h4>Java</h4><span>80%</span>
+          </div>
+          <progress value="80" max="100"></progress>
+        </div>
+        <div class="flex column">
+          <div class="flex jcsb">
+            <h4>FrontEnd</h4><span>88%</span>
+          </div>
+          <progress value="88" max="100"></progress>
+        </div>
+        <div class="flex column">
+          <div class="flex jcsb">
+            <h4>Backend</h4><span>75%</span>
+          </div>
+          <progress value="75" max="100"></progress>
+        </div>
+          <div class="flex column">
+          <div class="flex jcsb">
+            <h4>Informatica Tools</h4><span>90%</span>
+          </div>
+          <progress value="95" max="100"></progress>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="four">
+    <h2><span>Projects</span></h2>
+  
+    <div class="blocks">
+      <div class="block">
+        <h4>Transactions Data Mart Informatica Project </h4>
+        <p>The project is about a Transactional Processing Data Mart to integrate
+data from multiple departments of an Educational institution who have
+different departments which performs various activities related to
+academics, administration, library management, finance, etc. We
+developed a system to extract data from flat files and oracle after doing
+various transformations by using various created mappings with
+Informatica POWER CENTER and created workflows and sessions within
+workflow manager. We used ORACLE 12c for loading and storing data
+objects. As a result we can generate an analytical report with high data
+quality</p>
+      </div>
+      <div class="block">
+        <h4>Password Encapsulation using Arduino</h4>
+        <p>Worked on transfer of messages in encrypted format.we will encode
+and decode our required message using Arduino. Applied digital
+electronic techniques in C++ for Arduino programming for encryption of
+data</p>
+      
+  </section>
+  <footer id="bottom">
+    <div class="widgets">
+     
+      <div class="widget">
+        <h5 class="follow">Follow me</h5>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/kalyan-kumar-kota/" target="blank">LinkedIn</a></li>
+          <li><a href="https://github.com/kkk-333" target="blank">GitHub</a></li>
+          <li><a href="https://twitter.com/kotakalyankumar" target="blank">Twitter</a></li>
+          <li><a href="https://www.instagram.com/k.a.l.y.a.n_g.u.p.t.a/" target="blank">Instagram</a></li>
+        </ul>
+      </div>
+      
+      <div class="widget">
+        <h5>Contact me at</h5>
+        <ul>
+          <li>kayan35.662000@gmail.com</li>
+          <li>9059876620</li>
+        
+        </ul>
+      </div>
+    </div>
+    
+  </footer>
+</div>
+<script>
+ 
+
+
+
+</script>
+
+</body>
+</html> 
